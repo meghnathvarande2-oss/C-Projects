@@ -1,0 +1,71 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+
+struct bank {
+    int accNo;
+    char name[20];
+    float balance;
+};
+
+void display(struct bank b) {
+    printf("\nAccount No: %d", b.accNo);
+    printf("\nName: %s", b.name);
+    printf("\nBalance: %.2f\n", b.balance);
+}
+
+int main() {
+    struct bank b;
+    int choice;
+    float amt;
+
+    printf("Enter Account Number: ");
+    scanf("%d", &b.accNo);
+
+    printf("Enter Account Holder Name: ");
+    scanf("%s", b.name);
+
+    b.balance = 0;
+
+    do {
+        printf("\n--- BANK MENU ---");
+        printf("\n1. Deposit");
+        printf("\n2. Withdraw");
+        printf("\n3. Check Balance");
+        printf("\n4. Exit");
+        printf("\nEnter choice: ");
+        scanf("%d", &choice);
+
+        switch (choice) {
+            case 1:
+                printf("Enter amount to deposit: ");
+                scanf("%f", &amt);
+                b.balance += amt;
+                printf("Amount Deposited Successfully");
+                break;
+
+            case 2:
+                printf("Enter amount to withdraw: ");
+                scanf("%f", &amt);
+                if (amt <= b.balance) {
+                    b.balance -= amt;
+                    printf("Amount Withdrawn Successfully");
+                } else {
+                    printf("Insufficient Balance");
+                }
+                break;
+
+            case 3:
+                display(b);
+                break;
+
+            case 4:
+                printf("Thank You!");
+                break;
+
+            default:
+                printf("Invalid Choice");
+        }
+    } while (choice != 4);
+
+    return 0;
+}
